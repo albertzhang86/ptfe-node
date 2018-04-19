@@ -1,0 +1,24 @@
+{
+  "id": {
+    "in": ["params", "query"],
+    "errorMessage": "ID is wrong",
+    "isInt": true,
+    "toInt": true
+  },
+  "email": {
+    "errorMessage": "Invalid email",
+    "isEmail": true
+  },
+  "name": {
+    "isLength": {
+      "errorMessage": "Invalid name",
+      "options": { "min": 1 }
+    }
+  },
+  "username": {
+    "isLength": {
+      "errorMessage": "Invalid username",
+      "options": { "min": 5 }
+    }
+  }
+}
