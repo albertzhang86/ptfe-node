@@ -1,13 +1,9 @@
-# Node API Boilerplate
+# Node API spike with ES7 async and Express validator
 
 Tried to keep this one simple. It has:
 
 - Express with body-parser and request validator
 - ES7 async function
-
-# Test Files
-
-Test files should sit with their source and be in teh format `*.spec.js`.
 
 # Dev Environment
 
@@ -28,5 +24,7 @@ Make sure you have a `dist` folder.
 # Sample Endpoints
 
 `localhost:3000/api/users` get and post (with request body validator)
+
 `localhost:3000/api/users/[id]`
+
 `localhost:3000/api/users/[id]?include=posts`
