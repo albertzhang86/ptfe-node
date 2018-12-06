@@ -18,8 +18,6 @@ export default function() {
   app.use(bodyParser.json({
     limit: config.common.bodyLimit
   }));
-
-  app.use('/api/users', user());
   // health check and info check for autoscaling
   app.use('/api/health', health());
 

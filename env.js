@@ -4,7 +4,8 @@ export default {
     logLevel: 'debug',
     api: {
       user: 'https://jsonplaceholder.typicode.com/users',
-      post: 'https://jsonplaceholder.typicode.com/posts'
+      post: 'https://jsonplaceholder.typicode.com/posts',
+      eligibility: 'http://ptfecs.master.dev.a833-12.ams04.nonp.qcpaws.qantas.com.au/v1/eligibility';
     }
   },
   local: {
@@ -12,7 +13,8 @@ export default {
     logLevel: 'debug',
     api: {
       user: 'https://jsonplaceholder.typicode.com/users',
-      post: 'https://jsonplaceholder.typicode.com/posts'
+      post: 'https://jsonplaceholder.typicode.com/posts',
+      eligibility: 'http://ptfecs.master.dev.a833-12.ams04.nonp.qcpaws.qantas.com.au/v1/eligibility';
     }
   },
   production: {
@@ -20,7 +22,8 @@ export default {
     logLevel: '%LOG_LEVEL%',
     api: {
       user: 'https://jsonplaceholder.typicode.com/users',
-      post: 'https://jsonplaceholder.typicode.com/posts'
+      post: 'https://jsonplaceholder.typicode.com/posts',
+      eligibility: 'http://ptfecs.master.dev.a833-12.ams04.nonp.qcpaws.qantas.com.au/v1/eligibility';
     }
   },
   common: {
