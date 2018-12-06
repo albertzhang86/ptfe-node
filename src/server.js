@@ -3,6 +3,7 @@ import cors from 'cors';
 import bodyParser from 'body-parser';
 import config from './config';
 import user from './api/users';
+import autocheckin from './api/autocheckin';
 import health from './api/health';
 import http from 'http';
 import winstonLogger from './middleware/winstonLogger';
@@ -21,6 +22,7 @@ export default function() {
   // health check and info check for autoscaling
   app.use('/api/health', health());
 
+  app.use('/api/autocheckin', autocheckin());
 
   server.listen(process.env.PORT || config.common.port);
 
