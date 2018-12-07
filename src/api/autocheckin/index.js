@@ -1,31 +1,34 @@
 import { Router } from 'express';
-import { matchedData } from 'express-validator/filter';
 import errorHandler from '../../util/errorHandler';
-import {readAutocheckin} from "../../service/db";
-import {generateBoardingPass} from "../../service/boardingPass";
+import { read, write } from "../../service/db";
+import {generateBoardingPass, sendForwardBP} from "../../service/boardingPass";
 
 export default () => {
   const router = Router();
   router
   .get('/', async (req, res) =>  {
     try {
-
-      const body = matchedData(req);
-      const generateBoardingPassRequest = await readAutocheckin(body);
+      const items = await read();
       
-      const resultGenBP = await generateBoardingPass(generateBoardingPassRequest);
-      console.log('result', resultGenBP);
-      
-      const resultFBP = await sendForwardBP();
-      
-      
-      res.json({ data: generateBoardingPassRequest });
+      Promise.all(
+        
+          items.map(async item => {
+            console.log('generate BP', item);
+            await generateBoardingPass(item);
+            console.log('forward bp');
+            await sendForwardBP(item);
+            item.checkedIn = true;
+            console.log('update item ', item);
+            await write(item);
+            console.log('finish update '); 
+          })
+      ); 
+            
+      res.json({ items });
     } catch (e) {
+      console.log('error', e);
       errorHandler(res, e);
     }
   });
   return router;
 }
-
-
-

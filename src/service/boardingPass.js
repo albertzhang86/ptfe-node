@@ -30,56 +30,68 @@ export const sendForwardBP = async (generateBoardingPassRequest) => {
     return await  axios.post(forwardBPAPI, forwardBoardingPassRequest, config);
 }
 
-const createForwardBPRequest = () => {
+const createForwardBPRequest = (generateBPRequestBody) => {
 
+    const  customers = getCustomers(generateBPRequestBody.customers);
+    
     const requestJson = {
-        booking:{
-            surname:"MCCOWAN",
-                pnr:"TASMAN1"
+        booking: {
+            surname: generateBPRequestBody.booking.surname,
+            pnr: generateBPRequestBody.booking.pnr
         },
-        customers:[
-            {
-                customerId:"9EA53749FC9A4D6E",
-                title:"Mr",
-                givenName:"Lilly",
-                surname:"Pierini",
-                products:[
-                    {
-                        productId:"677691382A2248C7",
-                        productType:"INTERNATIONAL",
-                        flightNumber:"180",
-                        departure:{
-                            airportCode:"SYD",
-                            airportName:"Sydney",
-                            departureDate:"20190124",
-                            departureTime:"0625"
-                        },
-                        arrival:{
-                            airportCode:"CHC",
-                            airportName:"Christchurch",
-                            arrivalDate:"Invalid date",
-                            arrivalTime:"Invalid date"
-                        },
-                        companyIdentifier:{
-                            marketingCarrierCode:"QF",
-                            operatingCarrierCode:"QF"
-                        },
-                        barcodeRequired:true,
-                        passbookRequired:true,
-                        digitalBpAccepted:true
-                    }
-                ],
-                email:null,
-                forwardEmail:false,
-                forwardSMS:true,
-                mobileDetails:{
-                    countryCode:"+61",
-                    mobileNumber:"453534545"
-                }
-            }
-        ]
+        customers: customers,
+        email:null,
+        forwardSMS: true,
+        mobileDetails: {
+            countryCode: "+61",
+            mobileNumber: generateBPRequestBody.mobile
+        }
     };
     return requestJson;
 
-}
+};
 
+const getCustomers = (generateBPCustomers) => {
+    
+    const customers = generateBPCustomers.map(customer => {
+        return {
+            customerId: customer.customerId,
+            title: customer.title,
+            givenName: customer.givenName,
+            surname: customer.surname,
+            products: getProducts(customer.products)
+        };
+    });
+    return customers;
+    
+};
+
+const getProducts = (generateBPProducts) => {
+    const products  = generateBPProducts.map(product => {
+       return {
+           productId: product.productId,
+           productType: "INTERNATIONAL",
+           flightNumber: product.flightNumber,
+           departure: {
+               airportCode: product.departure.airportCode,
+               airportName: product.departure.airportName,
+               departureDate: product.departure.departureDate,
+               departureTime: product.departure.departureTime
+           },
+           arrival:{
+               airportCode: product.arrival.airportCode,
+               airportName: product.arrival.airportName,
+               departureDate: product.arrival.departureDate,
+               departureTime: product.arrival.departureTime
+           },
+           companyIdentifier:{
+               marketingCarrierCode: product.companyIdentifier.marketingCarrierCode,
+               operatingCarrierCode: product.companyIdentifier.operatingCarrierCode
+           },
+           barcodeRequired: true,
+           passbookRequired: product.passbookRequired,
+           digitalBpAccepted: product.digitalBpAccepted
+       }  
+    });
+    return products;
+};

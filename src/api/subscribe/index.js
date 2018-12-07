@@ -18,6 +18,7 @@ export default () => {
             pnr, surname, departurePort
           }
         },
+        checkedIn: false,
         pnr,
         mobile
       }
