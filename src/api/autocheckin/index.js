@@ -1,17 +1,14 @@
 import { Router } from 'express';
-import { matchedData } from 'express-validator/filter';
 import errorHandler from '../../util/errorHandler';
-import {readAutocheckin} from "../../service/autocheckin";
+import { read } from "../../service/db";
 
 export default () => {
   const router = Router();
   router
   .get('/', async (req, res) =>  {
     try {
-
-      const body = matchedData(req);
-      const user = await readAutocheckin(body);
-      res.json({ data: user });
+      const items = await read();
+      res.json({ items });
     } catch (e) {
       errorHandler(res, e);
     }

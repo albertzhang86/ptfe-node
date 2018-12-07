@@ -12,37 +12,18 @@ export const write = async (item) => {
         TableName: "auto_checkin",
         Item: item
     };
-
-    docClient.put(params, (err, data) => {
-      if (err) {
-        console.error("Unable to add item. Error JSON:", JSON.stringify(err, null, 2));
-      } else {
-        console.log("Added item:", JSON.stringify(data, null, 2));
-      }
-    });
-
+    return await docClient.put(params).promise();
 }
-export const readAutocheckin = async () => {
 
-    AWS.config.update({
-         region: "ap-southeast-2"
-    });
+export const read = async () => {
+  AWS.config.update({
+       region: "ap-southeast-2"
+  });
 
-    const docClient = new AWS.DynamoDB.DocumentClient();
+  const docClient = new AWS.DynamoDB.DocumentClient();
 
-    var params = {
-        TableName: "autocheckin",
-        Key: {
-            "customerId": "4355353535fgfgfg"
-        }
-    };
-
-    docClient.get(params, function (err, data) {
-        if (err) {
-            console.error("Unable to read item. Error JSON:", JSON.stringify(err, null, 2));
-        } else {
-            console.log("GetItem succeeded:", JSON.stringify(data, null, 2));
-        }
-    });
-
+  const params = {
+    TableName : "auto_checkin"
+  }
+  return await docClient.scan(params).promise().then(data => data.Items.filter(i => !i.checkedIn));
 }
