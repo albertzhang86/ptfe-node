@@ -64,3 +64,4 @@ dist/
 *~
 *.swp
 *.swo
+.idea/
