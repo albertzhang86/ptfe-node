@@ -2,7 +2,6 @@ import express from 'express';
 import cors from 'cors';
 import bodyParser from 'body-parser';
 import config from './config';
-import user from './api/users';
 import autocheckin from './api/autocheckin';
 import health from './api/health';
 import http from 'http';

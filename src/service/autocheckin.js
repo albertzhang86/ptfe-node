@@ -3,6 +3,10 @@ import AWS from "aws-sdk";
 
 export const readAutocheckin = async () => {
 
+    AWS.config.update({
+         region: "ap-southeast-2"
+    });
+    
     const docClient = new AWS.DynamoDB.DocumentClient();
 
     var params = {
