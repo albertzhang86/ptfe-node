@@ -24,9 +24,6 @@ export const searchBooking = async (pnr, surname, departurePort) => {
 
 
 const responseMapper = (response) => {
-  if (!isInternational) {
-    return response;
-  }
 
   const { config, headers, request, status, statusText, data } = response;
   const { customers, flights, products, tripType } = data;

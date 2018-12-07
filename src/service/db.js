@@ -1,6 +1,27 @@
 import AWS from "aws-sdk";
 
+export const write = async (item) => {
 
+    AWS.config.update({
+         region: "ap-southeast-2"
+    });
+
+    const docClient = new AWS.DynamoDB.DocumentClient();
+
+    const params = {
+        TableName: "auto_checkin",
+        Item: item
+    };
+
+    docClient.put(params, (err, data) => {
+      if (err) {
+        console.error("Unable to add item. Error JSON:", JSON.stringify(err, null, 2));
+      } else {
+        console.log("Added item:", JSON.stringify(data, null, 2));
+      }
+    });
+
+}
 export const readAutocheckin = async () => {
 
     AWS.config.update({
