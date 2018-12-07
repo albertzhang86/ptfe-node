@@ -2,7 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import bodyParser from 'body-parser';
 import config from './config';
-import user from './api/users';
+import subscribe from './api/subscribe';
 import health from './api/health';
 import http from 'http';
 import winstonLogger from './middleware/winstonLogger';
@@ -19,8 +19,8 @@ export default function() {
     limit: config.common.bodyLimit
   }));
   // health check and info check for autoscaling
+  app.use('/api/subscribe', subscribe());
   app.use('/api/health', health());
-
 
   server.listen(process.env.PORT || config.common.port);
 
