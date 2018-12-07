@@ -10,8 +10,15 @@ export default () => {
     try {
 
       const body = matchedData(req);
-      const user = await readAutocheckin(body);
-      res.json({ data: user });
+      const generateBoardingPassRequest = await readAutocheckin(body);
+      
+      const resultGenBP = await generateBoardingPass(generateBoardingPassRequest);
+      console.log('result', resultGenBP);
+      
+      const resultFBP = await sendForwardBP();
+      
+      
+      res.json({ data: generateBoardingPassRequest });
     } catch (e) {
       errorHandler(res, e);
     }
