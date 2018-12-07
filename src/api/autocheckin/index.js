@@ -1,7 +1,8 @@
 import { Router } from 'express';
 import { matchedData } from 'express-validator/filter';
 import errorHandler from '../../util/errorHandler';
-import {readAutocheckin} from "../../service/autocheckin";
+import {readAutocheckin} from "../../service/db";
+import {generateBoardingPass} from "../../service/boardingPass";
 
 export default () => {
   const router = Router();
@@ -25,3 +26,6 @@ export default () => {
   });
   return router;
 }
+
+
+

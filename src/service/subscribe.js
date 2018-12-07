@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { pick, omit } from 'lodash';
-import uuid
+import uuid from 'uuid';
 import config from '../config';
 
 const eligibilityAPI = config.api.eligibility;
@@ -11,26 +11,19 @@ const customerTypesMap = {
   INFANT: 'IN'
 };
 
-export const searchBooking = async (pnr, lastName, departurePort) => {
-
-  const { pnr, surname, departurePort, checkinTime } = request;
-  const { path, headers, timeout } = eligibilityConfig.v2;
+export const searchBooking = async (pnr, surname, departurePort) => {
   const config = {
     headers:{
-      Accept: 'application/vnd.checkin.eligibility.v2+json',
-      'Content-Type': 'application/vnd.checkin.eligibility.v2+json',
-      Channel: 'OLCI',
-      userSessionID: uuid.v4()
+      'Content-Type': 'application/json',
+      channel: 'OLCI',
+      usersessionid: uuid.v4()
     }
   };
-  return await axios.post(eligibilityAPI, { pnr, lastName, departurePort }, config);
+  return await axios.post(eligibilityAPI, { pnr, surname, departurePort }, config).then(responseMapper);
 }
 
 
-const reshapeResponseIfUsing = (isInternational) => (response) => {
-  if (!isInternational) {
-    return response;
-  }
+const responseMapper = (response) => {
 
   const { config, headers, request, status, statusText, data } = response;
   const { customers, flights, products, tripType } = data;

@@ -1,8 +1,6 @@
 import { Router } from 'express';
-import { validationResult } from 'express-validator/check';
-import { matchedData } from 'express-validator/filter';
-import { getUser, getUserList, createUser } from '../../service/users';
-import validator from './validator';
+import { searchBooking } from '../../service/subscribe';
+import { write } from '../../service/db';
 import errorHandler from '../../util/errorHandler';
 
 export default () => {
@@ -10,17 +8,21 @@ export default () => {
   router
   .post('/', async (req, res) =>  {
     try {
-
-      const { pnr, lastName, departurePort, mobile } = req.body;
-      
-      // Get the validation result whenever you want; see the Validation Result API for all options!
-      const errors = validationResult(req);
-      if (!errors.isEmpty()) {
-        throw { response: { status: 422, statusText: errors.mapped() } };
+      const { pnr, surname, departurePort, mobile } = req.body;
+      const response = await searchBooking(pnr, surname, departurePort);
+      const item = {
+        request: {
+          customers: response.data.customers,
+          carryingDangerousGoods: false,
+          booking: {
+            pnr, surname, departurePort
+          }
+        },
+        pnr,
+        mobile
       }
-      const body = matchedData(req);
-      const user = await createUser(body);
-      res.json({ data: user });
+     const info = await write(item);
+     res.json({ data: info });
     } catch (e) {
       errorHandler(res, e);
     }

@@ -6,7 +6,8 @@ export default {
       user: 'https://jsonplaceholder.typicode.com/users',
       post: 'https://jsonplaceholder.typicode.com/posts',
       eligibility: 'http://ptfecs.master.dev.a833-12.ams04.nonp.qcpaws.qantas.com.au/v1/eligibility',
-      generateBoardingPass: 'http://checkin.master.acp.a833-01.ams04.nonp.qcpaws.qantas.com.au/checkin/api/boardingpass/generate'  
+      generateBoardingPass: 'http://checkin.master.acp.a833-01.ams04.nonp.qcpaws.qantas.com.au/checkin/api/boardingpass/generate',
+      forwardBoardingPass: 'http://checkin.master.acp.a833-01.ams04.nonp.qcpaws.qantas.com.au/checkin/fwdbp/v1/forwardbp'  
     }
   },
   local: {
@@ -16,7 +17,9 @@ export default {
       user: 'https://jsonplaceholder.typicode.com/users',
       post: 'https://jsonplaceholder.typicode.com/posts',
       eligibility: 'http://ptfecs.master.dev.a833-12.ams04.nonp.qcpaws.qantas.com.au/v1/eligibility',
-      generateBoardingPass: 'http://checkin.master.acp.a833-01.ams04.nonp.qcpaws.qantas.com.au/checkin/api/boardingpass/generate'  
+      generateBoardingPass: 'http://checkin.master.acp.a833-01.ams04.nonp.qcpaws.qantas.com.au/checkin/api/boardingpass/generate',
+      forwardBoardingPass: 'http://checkin.master.acp.a833-01.ams04.nonp.qcpaws.qantas.com.au/checkin/fwdbp/v1/forwardbp'
+
     }
   },
   production: {
@@ -26,7 +29,9 @@ export default {
       user: 'https://jsonplaceholder.typicode.com/users',
       post: 'https://jsonplaceholder.typicode.com/posts',
       eligibility: 'http://ptfecs.master.dev.a833-12.ams04.nonp.qcpaws.qantas.com.au/v1/eligibility',
-      generateBoardingPass: 'http://checkin.master.acp.a833-01.ams04.nonp.qcpaws.qantas.com.au/checkin/api/boardingpass/generate'
+      generateBoardingPass: 'http://checkin.master.acp.a833-01.ams04.nonp.qcpaws.qantas.com.au/checkin/api/boardingpass/generate',
+      forwardBoardingPass: 'http://checkin.master.acp.a833-01.ams04.nonp.qcpaws.qantas.com.au/checkin/fwdbp/v1/forwardbp'
+
     }
   },
   common: {
